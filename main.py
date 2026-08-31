@@ -1,17 +1,19 @@
 from core.imagem import Imagem
 from filtro.filtros import Filtros
 
-# 1. Cria objeto Imagem → ele cria sozinho o Historico e o SalvarImagem
-minha_img = Imagem("/home/aryane/Documentos/programacao/python/editorImagens/images/entrada/parque.jpeg")
+# Carrega a imagem
+img = Imagem("/home/aryane/Documentos/programacao/python/editorImagens/images/entrada/parque.jpeg")  # coloque uma imagem existente
+img.informacoesImagens()
 
-# 2. Cria objeto de Filtros ligado à imagem
-filtro = Filtros(minha_img)
-
-# 3. Aplica filtros
+# Aplica filtros
+filtro = Filtros(img)
 filtro.tonsCinza()
 filtro.desfoque()
-filtro.contraste(1.2, 30)
 
-# 4. Usa tudo
+# Verifica e desfaz
+img.modificacoesFeitas()
+img.desfazer()
+img.modificacoesFeitas()
 
-minha_img.desfazer()
+# Salva
+img.salvarImagem("minha_imagem_editada")

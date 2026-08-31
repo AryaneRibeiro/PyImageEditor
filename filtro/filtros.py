@@ -11,7 +11,7 @@ class Filtros:
         self.imagem.aplicarAlteracoes(mod)
 
     def tamanhoImagem(self, altura, largura):
-        mod = cv2.resize(self.imagem.imgAtual, (altura, largura))
+        mod = cv2.resize(self.imagem.imgAtual, (largura, altura))
         self.imagem.aplicarAlteracoes(mod) 
 
     def desfoque(self):
