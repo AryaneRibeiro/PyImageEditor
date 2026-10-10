@@ -1,17 +1,14 @@
 from historico.historico import Historico
-from imagem.imagem import Imagem
+from imagem.leitorImagem import LeitorImagem
 from filtros.nitidez import Nitidez
+
+import cv2
 
 class Editor():
     def __init__(self, caminho):
-        self.imagem = Imagem(caminho)
+        self.imagem = LeitorImagem(caminho)
         self.historico = Historico()
-
-    def salvar(self):
-        self.imagem.salvarImagem()
-
-    def mostrarImagem(self):
-        self.imagem.mostrarImagem()
+        self.historico.addHistorico(self.imagem)
 
     def addFiltro(self):
         filtro = int(input("Escolha um filtro para adicionar: \n (1) - Suavilização \n (2) - Nitidez \n"))
@@ -23,8 +20,14 @@ class Editor():
             case 2:
                 print("Adicionando nitidez")
                 nitidez = Nitidez()
-                self.imagem.imagem = nitidez.aplicarNitidez(self.imagem.imagem)
+                self.imagem.imagem = nitidez.aplicar(self.imagem.imagem)   
+                self.historico.addHistorico(self.imagem.imagem)
                 print("Nitidez aplicada")
             case _:
                 print("Opção inválida")
 
+    def mostrarImagem(self):
+       self.historico.imgAtual()
+
+    def modicacoes(self):
+        return self.historico.qntDeModificacao()
