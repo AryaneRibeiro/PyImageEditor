@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class Filtro:
+class Filtro(ABC):
 
     @abstractmethod
     def aplicar(self, imagem):

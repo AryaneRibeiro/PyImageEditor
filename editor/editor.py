@@ -1,12 +1,12 @@
 from historico.historico import Historico
-from imagem.leitorImagem import LeitorImagem
+from imagem.RepositorioImagem import RepositorioImagem
 from filtros.nitidez import Nitidez
 
 import cv2
 
 class Editor():
     def __init__(self, caminho):
-        self.imagem = LeitorImagem(caminho)
+        self.imagem = RepositorioImagem(caminho)
         self.historico = Historico()
         self.historico.addHistorico(self.imagem)
 
@@ -31,3 +31,6 @@ class Editor():
 
     def modicacoes(self):
         return self.historico.qntDeModificacao()
+
+    def salvarImagem(self):
+        RepositorioImagem.salvarImagem(self.historico.returnImgAtual())

@@ -1,8 +1,9 @@
 from editor.editor import Editor
 
-
-imagem = Editor("/home/aryane/Documentos/programacao/python/editorImagens/images/entrada/parque.jpeg")
+imagem = Editor("images/entrada/imagem.png")
 
 imagem.addFiltro()
-imagem.mostrarImagem()
+# imagem.mostrarImagem()
 print(f'Modificações: {imagem.modicacoes()}')
+
+imagem.salvarImagem()

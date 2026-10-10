@@ -19,5 +19,8 @@ class Historico:
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
+    def returnImgAtual(self):
+        return self.historico[-1]
+
     def qntDeModificacao(self):
         return len(self.historico) - 1
