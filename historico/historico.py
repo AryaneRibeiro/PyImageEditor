@@ -5,22 +5,17 @@ class Historico:
     def __init__(self):
         self.historico = []
 
-    def addHistorico(self, imagem):
-        return self.historico.append(imagem)
+    def adicionarImagem(self, imagem):
+        self.historico.append(imagem)
 
-    def removerHistorico(self):
+    def desfazerAlteracao(self):
         if len(self.historico) > 0:
             self.historico.pop()
         else:
             print("Vc não editou a imagem")
 
-    def imgAtual(self):
-        cv2.imshow("imagem", self.historico[-1])
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-
-    def returnImgAtual(self):
+    def obterImagemAtual(self):
         return self.historico[-1]
 
-    def qntDeModificacao(self):
+    def numeroModicacoes(self):
         return len(self.historico) - 1
