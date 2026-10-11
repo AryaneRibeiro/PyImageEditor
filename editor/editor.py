@@ -1,7 +1,10 @@
 from historico.historico import Historico
 from imagem.RepositorioImagem import RepositorioImagem
-from filtros.nitidez import Nitidez
 from imagem.visualizadorImagem import VisualizarImagem
+
+
+from filtros.nitidez import Nitidez
+from filtros.suavilizacao import Suavalizacao
 
 class Editor():
     def __init__(self, caminho):
@@ -14,6 +17,8 @@ class Editor():
 
         match filtro:
             case 1:
+                suavalizacao = Suavalizacao()
+                self.historico.adicionarImagem(suavalizacao.aplicar(self.historico.obterImagemAtual()))
                 print("Adicionando suavilização")   
             case 2:
                 print("Adicionando nitidez")

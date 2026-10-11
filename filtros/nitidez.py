@@ -1,7 +1,9 @@
+from filtros.filtro import Filtro
+
 import cv2
 import numpy as np
 
-class Nitidez:
+class Nitidez(Filtro):
 
     def aplicar(self, imagem):
         kernel = np.array([

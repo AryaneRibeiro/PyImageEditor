@@ -11,7 +11,7 @@ class RepositorioImagem:
         print("Imagem carregada com sucesso!")
 
     @classmethod
-    def salvarImagem(self, imagem):
+    def salvarImagem(cls, imagem):
         salvar = cv2.imwrite("images/resultados/img_01.jpg", imagem)
 
         if salvar:
