@@ -1,24 +1,39 @@
 from historico.historico import Historico
-from imagem.RepositorioImagem import RepositorioImagem
-from imagem.visualizadorImagem import VisualizarImagem
-
-
+from imagem.imagem import Imagem
 from filtros.nitidez import Nitidez
-from filtros.suavilizacao import Suavalizacao
+from filtros.suavizacao import Suavizacao
+
+import cv2
 
 class Editor():
-    def __init__(self, caminho):
-        self.caminho = RepositorioImagem(caminho)
-        self.historico = Historico()
+
+    def lerImagem(self, caminho):
+        self.caminho = Imagem(caminho)
         self.historico.adicionarImagem(self.caminho.imagem)
+        self.historico = Historico()
+
+
+    def salvarImagem(self):
+        salvar = cv2.imwrite("images/resultados/img_01.jpg", self.historico.obterImagemAtual())
+
+        if salvar:
+            print("Imagem salva com sucesso!")
+        else:
+            print("Falhar ao salvar")
+
+    def visualizarImagem(self):
+        imagem = cv2.resize(self.historico.obterImagemAtual(), (512,512))
+        cv2.imshow('Edição', imagem )
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
     def addFiltro(self):
         filtro = int(input("Escolha um filtro para adicionar: \n (1) - Suavilização \n (2) - Nitidez \n"))
 
         match filtro:
             case 1:
-                suavalizacao = Suavalizacao()
-                self.historico.adicionarImagem(suavalizacao.aplicar(self.historico.obterImagemAtual()))
+                suavizacao = Suavizacao()
+                self.historico.adicionarImagem(suavizacao.aplicar(self.historico.obterImagemAtual()))
                 print("Adicionando suavilização")   
             case 2:
                 print("Adicionando nitidez")
@@ -28,12 +43,8 @@ class Editor():
             case _:
                 print("Opção inválida")
 
-    def mostrarImagem(self):
-       visualizar = VisualizarImagem()
-       visualizar.exibirImagemAtual(self.caminho.imagem, self.historico.obterImagemAtual())
 
     def nModificacoes(self):
         return self.historico.numeroModicacoes()
-
-    def salvarImagem(self):
-        RepositorioImagem.salvarImagem(self.historico.obterImagemAtual())
+        
+    
